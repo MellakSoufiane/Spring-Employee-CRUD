@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import fr.formation.domain.Departement;
 
-@Repository("departmentRepository")
-public interface DepartementRepository extends JpaRepository<Departement, Integer> {
+@Repository
+public interface DepartementRepository extends JpaRepository<Departement, Long> {
 
 	
 }
