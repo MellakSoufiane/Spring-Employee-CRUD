@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import fr.formation.domain.Employee;
 import fr.formation.pojo.EmployeeDTO;
+import fr.formation.service.DepartementService;
 import fr.formation.service.EmployeeService;
 
 @Controller
@@ -18,19 +20,15 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private DepartementService departementservice;
 	
 	//Create employee
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-		return employeeService.createEmployee(employeeDTO);
+	public Employee insertEmployee(@RequestBody Employee employeeDto) {
+		return employeeService.insert(employeeDto);
 	}
 	
-	//MAJ attributs employee
-	
-	//Récupérer info employee
-	
-	//supprimer employee
-
 }

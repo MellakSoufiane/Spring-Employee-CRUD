@@ -1,50 +1,50 @@
 package fr.formation.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name="departement")
+@Table(name="DEPARTEMENT")
 public class Departement {
-	//OneToMany avec employee
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long id;
-	
-	@Column(nullable = false)
-	public String nom;
+	  @Id 
+	  private Long id;
 
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="departement")
-	private List<Employee> employee;
-	
-	public Departement() {
-		
-	}
+	  @Column(name="nom")
+	  private String nom;
+//	  @OneToMany(mappedBy="departement",
+//				fetch=FetchType.EAGER,
+//				cascade=CascadeType.ALL)
+//	private List<Employee> employees = new ArrayList<>();
 
-	public Departement(long id, String nom, List<Employee> employee) {
+	 public Departement() {}
+
+	public Departement(String nom) {
 		super();
-		this.id = id;
 		this.nom = nom;
-		this.employee = employee;
 	}
 
-	public long getId() {
+	public Long getId() {
+		
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -56,12 +56,9 @@ public class Departement {
 		this.nom = nom;
 	}
 
-	public List<Employee> getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(List<Employee> employee) {
-		this.employee = employee;
-	}
-
+	 @Override
+	  public String toString() {
+	    return "Departement [id=" + id + ", nom=" + nom + "]";
+	  }
+	
 }

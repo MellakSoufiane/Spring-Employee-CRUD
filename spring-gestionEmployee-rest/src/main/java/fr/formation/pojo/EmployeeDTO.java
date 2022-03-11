@@ -6,7 +6,7 @@ import fr.formation.domain.Departement;
 
 public class EmployeeDTO {
 
-	public long matricule;
+	public int matricule;
 	public String nom;
 	public String prenom;
 	public String naissance;
@@ -17,10 +17,18 @@ public class EmployeeDTO {
 		
 	}
 
-	public EmployeeDTO(long matricule, String nom, String prenom, String naissance, int anciennete,
+	public EmployeeDTO(String nom, String prenom, String naissance, int anciennete) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.naissance = naissance;
+		this.anciennete = anciennete;
+	}
+
+	public EmployeeDTO( String nom, String prenom, String naissance, int anciennete,
 			Departement departement) {
 		super();
-		this.matricule = matricule;
+		
 		this.nom = nom;
 		this.prenom = prenom;
 		this.naissance = naissance;
@@ -32,7 +40,7 @@ public class EmployeeDTO {
 		return matricule;
 	}
 
-	public void setMatricule(long matricule) {
+	public void setMatricule(int matricule) {
 		this.matricule = matricule;
 	}
 

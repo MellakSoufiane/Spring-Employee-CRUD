@@ -6,7 +6,7 @@ import fr.formation.domain.Employee;
 
 public class DepartementDTO {
 
-	public long id;
+	public Integer id;
 	public String nom;
 	public List<Employee> employee;
 	
@@ -14,9 +14,14 @@ public class DepartementDTO {
 		
 	}
 
-	public DepartementDTO(long id, String nom, List<Employee> employee) {
+	public DepartementDTO(String nom) {
 		super();
-		this.id = id;
+		this.nom = nom;
+	}
+
+	public DepartementDTO( String nom, List<Employee> employee) {
+		super();
+		
 		this.nom = nom;
 		this.employee = employee;
 	}
@@ -25,7 +30,7 @@ public class DepartementDTO {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -44,6 +49,8 @@ public class DepartementDTO {
 	public void setEmployee(List<Employee> employee) {
 		this.employee = employee;
 	}
+
+	
 
 
 }

@@ -1,5 +1,8 @@
 package fr.formation.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,51 +18,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
-	
-	@Override
-	public EmployeeDTO findEmployee(Long employeeId) throws EntityNotFoundException {
-		Employee employee=null;
-		employee=employeeRepository.findById(employeeId)
-				.orElseThrow(
-						()-> new EntityNotFoundException("Impossible de trouver un employee avec ce matricule : " + employeeId));
-		return new EmployeeDTO(employee.getMatricule(), employee.getNom(), employee.getPrenom(), employee.getNaissance(), employee.getAnciennete(), employee.getDepartement());
-	}
+
 
 	@Override
-	public EmployeeDTO createEmployee(EmployeeDTO employeeId) {
-		Employee employee=new Employee();
-		employee.setAnciennete(employeeId.getAnciennete());
-		employee.setMatricule(employeeId.getMatricule());
-		employee.setNaissance(employeeId.getNaissance());
-		employee.setNom(employeeId.getNom());
-		employee.setPrenom(employeeId.getPrenom());
+	public Employee insert(Employee employee) {
+		Employee employeedata = new Employee();
+		employeedata.setNom(employee.getNom());
+		employeedata.setPrenom(employee.getPrenom());
+		employeedata.setNaissance(employee.getNaissance());
+		employeedata.setAnciennete(employee.getAnciennete());
 		
 		employeeRepository.save(employee);
-		return employeeId;
+		employee.setMatricule(employeedata.getMatricule());
+		
+		return employee;
 	}
 
-	@Override
-	public void deleteEmployee(Long employeeId) throws EntityNotFoundException {
-	Employee employee=employeeRepository.findById(employeeId)
-				.orElseThrow(
-						()-> new EntityNotFoundException("Impossible de trouver un employee avec ce matricule : " + employeeId));
-	employeeRepository.delete(employee);
-	}
-
-	@Override
-	public void updateEmployee(long employeeId, EmployeeDTO employeeDTO) throws EntityNotFoundException {
-		Employee employee=employeeRepository.findById(employeeId)
-				.orElseThrow(
-						()-> new EntityNotFoundException("Impossible de trouver un employee avec ce matricule : " + employeeId));
-		employee.setAnciennete(employeeDTO.getAnciennete());
-		employee.setMatricule(employeeDTO.getMatricule());
-		employee.setNaissance(employeeDTO.getNaissance());
-		employee.setNom(employeeDTO.getNom());
-		employee.setPrenom(employeeDTO.getPrenom());
-		
-		employeeRepository.save(employee);
-		
-	}
+	
 
 }
